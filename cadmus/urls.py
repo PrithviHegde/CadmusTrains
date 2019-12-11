@@ -29,5 +29,6 @@ urlpatterns = [
     path('UpdateTrain/',views.UpdateTrain),
     path('Choose/', views.Choose),
     path('TrainDetails', views.TrainDetails),
+    path('Login', views.Login),
     
 ]

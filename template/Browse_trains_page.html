@@ -24,23 +24,25 @@
   <header>
       <nav class="black z-depth-0">
           <div class="container nav-wrapper">
-            <a href="#" class="brand-logo cyan-text text-darken-1"><span style="font-weight: bold; font-size: 30px; font-family: Arial">Cadmus</span></a> 
-            <a href="#" class="sidenav-trigger" data-target="mobile-links">
+            <a href="../inputform#Home_1" class="brand-logo cyan-text text-darken-1"><span style="font-weight: bold; font-size: 30px; font-family: Arial">Cadmus</span></a> 
+            <a href="../inputform#Home_1" class="sidenav-trigger" data-target="mobile-links">
                 <i class="material-icons large">menu</i>
             </a>
             <ul id = "nav-mobile" class="right hide-on-med-and-down">
               <li><a href="../inputform#Home_1" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Home</span><i class="material-icons grey-text left pulse">home</i></a></li>
-              <li><a href="../inputform#Features_2" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Features</span><i class="material-icons left grey-text">call</i></a></li>
+              <li><a href="../inputform#Features_2" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Features</span><i class="material-icons left grey-text">train</i></a></li>
               <li><a href="../inputform#About Us_3" class="cyan-text"><span style="font-weight: bold; font-size: 18px">About Us</span><i class="material-icons left grey-text">call</i></a></li>
               <li><a href="../inputform#Help_4" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Help</span><i class="material-icons left grey-text">help</i></a></li>
+              <li><a href="../Login" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Admin Login</span><i class="material-icons left grey-text">person</i></a></li>
             </ul>
           </div>
         </nav>
         <ul class="sidenav" id="mobile-links">
             <li><a href="../inputform#Home_1" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Home</span><i class="material-icons grey-text left pulse">home</i></a></li>
-            <li><a href="../inputform#Features_2" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Features</span><i class="material-icons left grey-text">call</i></a></li>
+            <li><a href="../inputform#Features_2" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Features</span><i class="material-icons left grey-text">train</i></a></li>
             <li><a href="../inputform#About Us_3" class="cyan-text"><span style="font-weight: bold; font-size: 18px">About Us</span><i class="material-icons left grey-text">call</i></a></li>
             <li><a href="../inputform#Help_4" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Help</span><i class="material-icons left grey-text">help</i></a></li>
+            <li><a href="../Login" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Admin Login</span><i class="material-icons left grey-text">person</i></a></li>
         </ul>
         
   </header>
@@ -55,17 +57,17 @@
         <div class="row justify-content-md-center">
         <h1>
             <span style="font-weight: bold; font-size: 50px;" class="cyan-text text-accent-4">
-             Find the right train for yourself
+             Find the right train for yourself.
             </span>
         </h1>
         
         <form action="#" class="action" method="POST">
           {% csrf_token %}
         <div class="row">
-          <div class="col s2">
+          <div class="col s4">
             <div class="input-field col s12" >
               <select id="PriceOrTime" name="SelectBy">
-                  
+                  <option value="#" disabled selected>Choose price or time</option>
                   <option value="Price"><font color="red">Price</font></option>
                   <option value="Time">Time</option>
                 </select>
@@ -79,9 +81,10 @@
         
       <!--the Dropdown for select from city-->
         <div class="row">
-            <div class="col s3">
+            <div class="col s4">
               <div class="input-field col s12">
                 <select id="FromCityDrop" name="FromCity">
+                  <option value="#" disabled selected>Select from city</option>
                   <option value="Bangalore">Bangalore</option>
                   <option value="Chennai">Chennai</option>
                   <option value="Mumbai">Mumbai</option>
@@ -104,9 +107,10 @@
       
                 
         <div class="row">
-            <div class="col s3">
+            <div class="col s4">
               <div class="input-field col s12">
                 <select id="ToCityDrop" name="ToCity">
+                  <option value="#" disabled selected>Select to city</option>
                   <option value="Bangalore">Bangalore</option>
                   <option value="Chennai">Chennai</option>
                   <option value="Mumbai">Mumbai</option>
@@ -146,7 +150,7 @@
       table {
     background-color: #00bfa5  !important;
 }
-      </style>
+    </style>
 
 
     <div class="row"> 
@@ -178,7 +182,6 @@
   </form>
       {%endif%}
   </div>
-
 
     <!--JavaScript at end of body for optimized loading-->
   <script src="{%static "cadmusweb/js/jquery-3.3.1.min.js"%}"></script>

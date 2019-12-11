@@ -449,3 +449,38 @@ def TrainDetails(request):
         return render(request, 'Train_Details_page.html')
 
 
+def Login(request):
+    if request.method=="POST":
+        mycon=mysql.connector.connect(host="localhost",user="root",passwd="admin",database="trains")
+        u_l=request.POST['username']
+        p_l=request.POST['password']
+        cursor=mycon.cursor()
+
+        lusers=[]
+        lpwd=[]
+
+        sql1="select username from index_login"
+        cursor.execute(sql1)
+        result=cursor.fetchall()
+
+        for i in result:
+            lusers=lusers+[i[0]]
+        print(lusers)
+
+        sql2="select password from index_login"
+        cursor.execute(sql2)
+        result2=cursor.fetchall()
+
+        for j in result2:
+            lpwd=lpwd+[j[0]]
+        print(lpwd)
+        print(u_l, p_l)
+
+        l=(dict(zip(lusers,lpwd)))
+        if (u_l in l) and l[u_l]==p_l:
+            return HttpResponseRedirect('../administrator')
+        else:
+            messages.add_message(request, messages.WARNING, 'Incorrect Username/Password')
+            return render(request,'AdminLogin.html')
+    else:
+        return render(request,'AdminLogin.html')
