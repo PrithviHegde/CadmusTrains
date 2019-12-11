@@ -1,7 +1,4 @@
 from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from cadmusweb.models import querydata
@@ -11,16 +8,18 @@ RouteId = 0
 StopCount = 0
 
 
-
+# Establish and verify connection to database.
 con = mysql.connector.connect(host="localhost", user="root", passwd="admin",database="trains",auth_plugin='mysql_native_password')
 if con.is_connected():
     print("Connected to MySQL database")
 else:
     print("Not connected to mysql database")
+
+
 # Create your views here.
 
+# View for the querydata model, to take queries from user. Appends to a CSV file.
 def inputform(request):
-
     if request.method == "POST":
         email = request.POST['email']
         phone = request.POST['phone']
@@ -45,7 +44,8 @@ def inputform(request):
     else:
         return render(request,'test.html')
 
-
+# View for Browsetrains page.
+# Takes inputs from user, and uses algorithms to find the best train, sorted by either cost/duration, as inputted by the user.
 def browsetrains(request):
     if request.method == 'POST':
         print(request.POST)
@@ -57,7 +57,6 @@ def browsetrains(request):
         mycursor.execute("use trains")
         
         #Fxn to find the cityIDs given the citynames
-
         def FindCityId():
             input_From = request.POST['FromCity']
             input_To = request.POST['ToCity']
@@ -87,7 +86,6 @@ def browsetrains(request):
 
 
         #Fxn to find routes given cityIds
-
         def Findcadmus(L):
 
             #L = FindCityId()
@@ -125,7 +123,6 @@ def browsetrains(request):
 
 
         #Find sequence given routes, and find train    
-
         def FindSequence(choice):
             #Inputs to be taken from findcadmus fxn
             #Therefore changesql3 and sql4 input paramaters
@@ -202,8 +199,7 @@ def browsetrains(request):
                         citylist2.append(citylist)
                     sequencedict[i] = citylist2
 
-                    # Fxn to find the distance between cities using sequences
-
+                    # To find the distance between cities using sequences
                     TotalDistance = []
 
                     for k in sequencedict.values():
@@ -221,7 +217,6 @@ def browsetrains(request):
                             pass
                         else:
                             TotalDistance.append(Distance)
-
 
                         #To remove reverse trains
                     if result < 0:
@@ -251,7 +246,6 @@ def browsetrains(request):
                 ResultList = sorted(ResultList, key = lambda i : i['timetaken'])
             return ResultList
 
-            #=======================================================================================================
         choice = request.POST['SelectBy']
         TableList = FindSequence(choice)
 
@@ -260,6 +254,7 @@ def browsetrains(request):
         return render(request, 'Browse_trains_page.html',)
 
 
+# View for deleting or adding train selector.
 def Choose(request):
     if request.method == 'POST':
         if request.POST['Choose'] == 'Delete':
@@ -270,6 +265,7 @@ def Choose(request):
         return render(request, 'admin.html')
 
 
+# View to delete train.
 def Delete(request):
     if request.method == 'POST':
 
@@ -300,6 +296,7 @@ def Delete(request):
         return render(request, 'DeleteTrains.html')
     
 
+# View to update train.
 def UpdateTrain(request):
     '''imp reminder -- add a message for errenous inputted data'''
     if request.method == 'POST':
@@ -369,6 +366,7 @@ def UpdateTrain(request):
         return render(request, 'UpdateTrain.html') 
 
 
+# View to return Deletetrain/ updatettrain pages.  
 def administrator(request):
     if request.method == 'POST':
         if request.POST['Choose'] == 'Delete':
@@ -382,6 +380,7 @@ def administrator(request):
         return render(request, 'admin.html')
 
 
+# View to display train details, for a train inputted by the user.
 def TrainDetails(request):
     if request.method  == 'POST':
         def TrainDict():
@@ -449,6 +448,7 @@ def TrainDetails(request):
         return render(request, 'Train_Details_page.html')
 
 
+# View for the login page.
 def Login(request):
     if request.method=="POST":
         mycon=mysql.connector.connect(host="localhost",user="root",passwd="admin",database="trains")
