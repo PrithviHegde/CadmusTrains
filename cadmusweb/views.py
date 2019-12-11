@@ -9,7 +9,7 @@ StopCount = 0
 
 
 # Establish and verify connection to database.
-con = mysql.connector.connect(host="localhost", user="root", passwd="admin",database="trains",auth_plugin='mysql_native_password')
+con = mysql.connector.connect(host="localhost", user="root", passwd="root",database="cadmus",auth_plugin='mysql_native_password')
 if con.is_connected():
     print("Connected to MySQL database")
 else:
@@ -50,11 +50,11 @@ def browsetrains(request):
     if request.method == 'POST':
         print(request.POST)
 
-        con = mysql.connector.connect(host="localhost", user="root", passwd="admin", database="trains" ,auth_plugin='mysql_native_password')
+        con = mysql.connector.connect(host="localhost", user="root", passwd="root", database="cadmus" ,auth_plugin='mysql_native_password')
         if con.is_connected():
             print('Connected2')
         mycursor = con.cursor(buffered=True)
-        mycursor.execute("use trains")
+        mycursor.execute("use cadmus")
         
         #Fxn to find the cityIDs given the citynames
         def FindCityId():
@@ -65,11 +65,11 @@ def browsetrains(request):
                 return 0, 0
             else:
 
-                con = mysql.connector.connect(host="localhost", user="root", passwd="admin", database="trains", auth_plugin='mysql_native_password')
+                con = mysql.connector.connect(host="localhost", user="root", passwd="root", database="cadmus", auth_plugin='mysql_native_password')
                 if con.is_connected():
                     print('Connected2')
                 mycursor = con.cursor(buffered=True)
-                mycursor.execute("use trains")
+                mycursor.execute("use cadmus")
 
 
                 sql1 = 'select cityid from cities where cityname = ' + "\'" + input_From + "\'"
@@ -270,7 +270,7 @@ def Delete(request):
     if request.method == 'POST':
 
         mycursor=con.cursor(buffered=True)
-        mycursor.execute("use trains")
+        mycursor.execute("use cadmus")
 
         TrainName = request.POST['TrainName']
 
@@ -304,11 +304,11 @@ def UpdateTrain(request):
         choice = 'Update'    
         # This fxn is not to be called directly
         def AddTrains():
-            con = mysql.connector.connect(host="localhost", user="root", passwd="admin", database="trains", auth_plugin='mysql_native_password')
+            con = mysql.connector.connect(host="localhost", user="root", passwd="root", database="cadmus", auth_plugin='mysql_native_password')
             if con.is_connected():
                 print('Connected2')
             mycursor = con.cursor(buffered=True)
-            mycursor.execute("use trains")
+            mycursor.execute("use cadmus")
 
 
             TrainName = request.POST['TrainName']
@@ -336,11 +336,11 @@ def UpdateTrain(request):
         def AddRoute():
             CityList = AddTrains()
             print(CityList)
-            con = mysql.connector.connect(host="localhost", user="root", passwd="admin", database="trains", auth_plugin='mysql_native_password')
+            con = mysql.connector.connect(host="localhost", user="root", passwd="root", database="cadmus", auth_plugin='mysql_native_password')
             if con.is_connected():
                 print('Connected2')
             mycursor = con.cursor(buffered=True)
-            mycursor.execute("use trains")
+            mycursor.execute("use cadmus")
             RouteList = []
 
             for i in CityList:
@@ -384,11 +384,11 @@ def administrator(request):
 def TrainDetails(request):
     if request.method  == 'POST':
         def TrainDict():
-            con = mysql.connector.connect(host="localhost", user="root", passwd="admin", database="trains" ,auth_plugin='mysql_native_password')
+            con = mysql.connector.connect(host="localhost", user="root", passwd="root", database="cadmus" ,auth_plugin='mysql_native_password')
             if con.is_connected():
                 print('Connected2')
             mycursor = con.cursor(buffered=True)
-            mycursor.execute("use trains")
+            mycursor.execute("use cadmus")
 
             d={}
             TrainName = request.POST['TrainName']
@@ -451,7 +451,7 @@ def TrainDetails(request):
 # View for the login page.
 def Login(request):
     if request.method=="POST":
-        mycon=mysql.connector.connect(host="localhost",user="root",passwd="admin",database="trains")
+        mycon=mysql.connector.connect(host="localhost",user="root",passwd="root",database="cadmus")
         u_l=request.POST['username']
         p_l=request.POST['password']
         cursor=mycon.cursor()

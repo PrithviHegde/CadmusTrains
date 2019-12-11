@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'cadmus.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'trains',
+        'NAME': 'cadmus',
         'USER': 'root',
-        'PASSWORD': 'admin',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
     }
 }
