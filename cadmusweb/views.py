@@ -312,7 +312,10 @@ def UpdateTrain(request):
 
 
             TrainName = request.POST['TrainName']
+            TrainName = "'" + TrainName + "'"
+            print(TrainName)
             TrainSpeed = request.POST['TrainSpeed']
+            Stop_Cost = request.POST['stop_cost']
             #global StopCount
             #StopCount = request.POST['StopCount']
             CityListStr = request.POST['CityList']
@@ -327,8 +330,10 @@ def UpdateTrain(request):
             global RouteId
             RouteId = TrainIdNew
 
-            AddTrainSql = 'insert into trains values ( ' + str(TrainIdNew) + ',' + "'" + str(TrainName) + "'" + ',' + str(TrainSpeed) + ',' + str(RouteId) + ')'
+            AddTrainSql = 'insert into trains values({}, {}, {}, {})'.format(TrainIdNew, TrainName, TrainSpeed, RouteId)
             mycursor.execute(AddTrainSql)
+            AddPriceSql = 'insert into price values({}, {})'.format(TrainIdNew, Stop_Cost)
+            mycursor.execute(AddPriceSql)
             con.commit()
             return CityList
 
@@ -363,8 +368,8 @@ def UpdateTrain(request):
         return render(request, 'test.html')
     else:
         print('nopst')
-        return render(request, 'UpdateTrain.html') 
-
+        return render(request, 'UpdateTrain.html')
+        
 
 # View to return Deletetrain/ updatettrain pages.  
 def administrator(request):

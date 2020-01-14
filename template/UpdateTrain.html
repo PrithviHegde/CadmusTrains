@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-{% load staticfiles %}
+{% load static %}
 
 <html lang="en">
 
@@ -31,16 +31,15 @@
     <div class="navbar-fixed">
       <nav class="black z-depth-0">
           <div class="container nav-wrapper">
-            <a href="../inputform#Home_1" class="brand-logo cyan-text text-darken-1"><span style="font-weight: bold; font-size: 30px; font-family: Arial">Cadmus</span></a> 
-            <a href="../inputform#Home_1" class="sidenav-trigger" data-target="mobile-links">
+            <a href="#" class="brand-logo cyan-text text-darken-1"><span style="font-weight: bold; font-size: 30px; font-family: Arial">Cadmus</span></a> 
+            <a href="#" class="sidenav-trigger" data-target="mobile-links">
                 <i class="material-icons large">menu</i>
             </a>
             <ul id = "nav-mobile" class="right hide-on-med-and-down">
               <li><a href="../inputform#Home_1" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Home</span><i class="material-icons grey-text left pulse">home</i></a></li>
-              <li><a href="../inputform#Features_2" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Features</span><i class="material-icons left grey-text">train</i></a></li>
+              <li><a href="../inputform#Features_2" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Features</span><i class="material-icons left grey-text">call</i></a></li>
               <li><a href="../inputform#About Us_3" class="cyan-text"><span style="font-weight: bold; font-size: 18px">About Us</span><i class="material-icons left grey-text">call</i></a></li>
               <li><a href="../inputform#Help_4" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Help</span><i class="material-icons left grey-text">help</i></a></li>
-              <li><a href="../Login" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Admin Login</span><i class="material-icons left grey-text">person</i></a></li>
             </ul>
           </div>
       </nav>
@@ -48,10 +47,9 @@
 
         <ul class="sidenav" id="mobile-links">
             <li><a href="../inputform#Home_1" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Home</span><i class="material-icons grey-text left pulse">home</i></a></li>
-            <li><a href="../inputform#Features_2" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Features</span><i class="material-icons left grey-text">train</i></a></li>
+            <li><a href="../inputform#Features_2" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Features</span><i class="material-icons left grey-text">call</i></a></li>
             <li><a href="../inputform#About Us_3" class="cyan-text"><span style="font-weight: bold; font-size: 18px">About Us</span><i class="material-icons left grey-text">call</i></a></li>
             <li><a href="../inputform#Help_4" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Help</span><i class="material-icons left grey-text">help</i></a></li>
-            <li><a href="../Login" class="cyan-text"><span style="font-weight: bold; font-size: 18px">Admin Login</span><i class="material-icons left grey-text">person</i></a></li>
         </ul>
     </header>
         <!--End Navbar-->
@@ -74,15 +72,20 @@
               <input type="number" name="TrainSpeed" id="TrainSpeed" class="validate" pattern="[0-400]{1}">
               <label for="TrainSpeed">Train Speed</label>
             </div>
+            <div class="input-field">
+              <i class="material-icons prefix">stop_cost</i>
+              <input type="text" name="stop_cost" id="stop_cost" class="validate">
+              <label for="stop_cost">Enter price of train per stop</label>
+            </div>
             <!--CSV input for city list-->
             <div class="input-field">
               <i class="material-icons prefix">format_list_numbered</i>
               <input type="text" name="CityList" id="CityList" class="validate">
-              <label for="CityList">Enter cities as comma-seperated values</label>
+              <label for="CityList">Enter comma-seperated list of cities</label>
             </div>
             <!--Send Button input-->
             <div class="input-field center">
-              <button class="btn waves-effect waves-light" type="submit">Submit
+              <button class="btn waves-effect waves-light cyan darken-3" type="submit">Submit
                 <i class="material-icons right">send</i>
               </button>
             </div>
