@@ -56,16 +56,17 @@
                 <input type="text" id="TrainName" class="validate"  name="TrainName">
                 <label for="TrainName">Enter Train Name</label>
             </div>
-            
+  </div>
+  <div>
             <button class="btn waves-effect waves-light"  id="Go" type="submit" name="action">Submit
                 <i class="material-icons right">send</i>
             </button>
     </form>
   </div>
     <!--for tables-->
-  
       <div class="row"> 
           {% if TrainInfo %}
+          {% if not messages %}
             <form action="/" method="POST">
                 <table id="table1" class="striped">
                     <thead>
@@ -96,17 +97,40 @@
                      </tbody>
                 </table>
             {% endif %}
+            {% endif %}
             </form>
         </div>
 
       {% if messages %}
-      <ul class="messages">
-        {% for message in messages %}
-          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  
+        <ul class="messages">
+          {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+        
+        <div class="row">
+          <div class="container">
+          {% if TrainList %}
+          <form action="/" method="POST">
+            <table id="table0" class="responsive-table">
+              <thead>
+                <tr>
+                  <th>Train Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in TrainList %}
+                <tr>
+                  <td>{{i}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </form>
+          {% endif %}
+          </div>
+        </div>
 
 
 </div>

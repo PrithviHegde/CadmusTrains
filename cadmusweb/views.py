@@ -349,25 +349,26 @@ def UpdateTrain(request):
             RouteList = []
 
             for i in CityList:
-                CityIdSql = 'select CityId from cities where CityName = ' + "'" + i + "'" 
-                mycursor.execute(CityIdSql)       
+                CityIdSql = 'select CityId from cities where CityName = ' + "'" + i + "'"
+                mycursor.execute(CityIdSql)
                 CityId = mycursor.fetchone()
-                RouteList.append(CityId[0])
-            print(RouteList)
-
-            for i in range(0, len(RouteList)-1):
-                AddRouteSql = 'insert into routes values ( ' + str(RouteId) + ',' + str(RouteList[i]) + "," + str(RouteList[i+1]) + "," + str(i+1) + ')'
-                print(AddRouteSql)
-                mycursor.execute(AddRouteSql)
-                con.commit()
+                print(CityId)
+                if CityId == None:
+                    print('cityerror')
+                    messages.add_message(request, messages.WARNING, 'Train to be deleted doesnot exist')
+                    return render(request, 'UpdateTrain.html')
+                else:
+                    RouteList.append(CityId[0])
+                    for i in range(0, len(RouteList)-1):
+                        AddRouteSql = 'insert into routes values ( ' + str(RouteId) + ',' + str(RouteList[i]) + "," + str(RouteList[i+1]) + "," + str(i+1) + ')'
+                        mycursor.execute(AddRouteSql)
+                        con.commit()
             return 0
-
 
         call = AddRoute()
 
         return render(request, 'test.html')
     else:
-        print('nopst')
         return render(request, 'UpdateTrain.html')
         
 
@@ -387,6 +388,17 @@ def administrator(request):
 
 # View to display train details, for a train inputted by the user.
 def TrainDetails(request):
+    con = mysql.connector.connect(host="localhost", user="root", passwd="root", database="cadmus" ,auth_plugin='mysql_native_password')
+    if con.is_connected():
+        print('Connected2')
+    mycursor = con.cursor(buffered=True)
+    mycursor.execute("use cadmus") 
+
+    TrainsTableSQL = 'select distinct trainname from trains'
+    mycursor.execute(TrainsTableSQL)
+    TrainsTable = mycursor.fetchall()
+    TrainsTable = [x[0] for x in TrainsTable]
+
     if request.method  == 'POST':
         def TrainDict():
             con = mysql.connector.connect(host="localhost", user="root", passwd="root", database="cadmus" ,auth_plugin='mysql_native_password')
@@ -394,6 +406,11 @@ def TrainDetails(request):
                 print('Connected2')
             mycursor = con.cursor(buffered=True)
             mycursor.execute("use cadmus")
+            
+            TrainsTableSQL = 'select distinct trainname from trains'
+            mycursor.execute(TrainsTableSQL)
+            TrainsTable = mycursor.fetchall()
+            TrainsTable = [x[0] for x in TrainsTable]
 
             d={}
             TrainName = request.POST['TrainName']
@@ -402,7 +419,7 @@ def TrainDetails(request):
             mycursor.execute(sql2)
             x=mycursor.fetchall()
             if x == []:
-                messages.add_message(request, messages.WARNING, 'Please enter unique From and To cities')
+                messages.add_message(request, messages.WARNING, 'Train does not exist')
                 return (0,0,0,0)
             else:
 
@@ -448,9 +465,9 @@ def TrainDetails(request):
                 return TrainsDetailsList
             
         Trains = TrainDict()
-        return render(request, 'Train_Details_page.html',{'TrainInfo':Trains})
+        return render(request, 'Train_Details_page.html',{'TrainInfo':Trains, 'TrainList': TrainsTable})
     else:
-        return render(request, 'Train_Details_page.html')
+        return render(request, 'Train_Details_page.html', {'TrainList':TrainsTable})
 
 
 # View for the login page.
