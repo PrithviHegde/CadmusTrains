@@ -267,10 +267,22 @@ def Choose(request):
 
 # View to delete train.
 def Delete(request):
+    con = mysql.connector.connect(host="localhost", user="root", passwd="root", database="cadmus" ,auth_plugin='mysql_native_password')
+    if con.is_connected():
+        mycursor = con.cursor(buffered=True)
+        mycursor.execute("use cadmus") 
+
+    TrainsTableSQL = 'select distinct trainname from trains'
+    mycursor.execute(TrainsTableSQL)
+    TrainsTable = mycursor.fetchall()
+    TrainsTable = [x[0] for x in TrainsTable]
+
     if request.method == 'POST':
 
-        mycursor=con.cursor(buffered=True)
-        mycursor.execute("use cadmus")
+        con = mysql.connector.connect(host="localhost", user="root", passwd="root", database="cadmus" ,auth_plugin='mysql_native_password')
+        if con.is_connected():
+            mycursor = con.cursor(buffered=True)
+            mycursor.execute("use cadmus") 
 
         TrainName = request.POST['TrainName']
 
@@ -279,7 +291,7 @@ def Delete(request):
         RouteID = mycursor.fetchone()
         if RouteID == None:
             messages.add_message(request, messages.WARNING, 'Train to be deleted doesnot exist')
-            return render(request, 'DeleteTrains.html')
+            return render(request, 'DeleteTrains.html', {'TrainList': TrainsTable})
         else:
             RouteID = RouteID[0]
 
@@ -291,9 +303,9 @@ def Delete(request):
             DeleteRouteSQL = 'delete from routes where RouteID = ' + str(RouteID)
             mycursor.execute(DeleteRouteSQL)
             con.commit()
-            return render(request, 'test.html')
+            return render(request, 'test.html',)
     else:
-        return render(request, 'DeleteTrains.html')
+        return render(request, 'DeleteTrains.html', {'TrainList': TrainsTable})
     
 
 # View to update train.

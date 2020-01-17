@@ -83,6 +83,25 @@
         {% endfor %}
       </ul>
     {% endif %}
+
+    {% if TrainList %}
+          <form action="/" method="POST">
+            <table id="table0" class="responsive-table">
+              <thead>
+                <tr>
+                  <th>Train Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in TrainList %}
+                <tr>
+                  <td>{{i}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </form>
+          {% endif %}
     
     </div>
   </div>
