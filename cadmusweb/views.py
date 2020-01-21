@@ -30,7 +30,7 @@ def inputform(request):
         print(phone)
         print(message)
         lst = querydata()
-        lst.Sno = 1
+        #lst.Sno = 1
         lst.Email = email
         lst.Phone = phone
         lst.Message = message
