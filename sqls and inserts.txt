@@ -1,0 +1,152 @@
+Tables and Inserts
+
+create table TRAINS
+(
+TrainID integer primary key,
+TrainName varchar(40),
+TrainSpeed integer,
+RouteID integer references Routes(RouteID) on update cascade on delete cascade
+);
+
+create table CITIES
+(
+CityID integer primary key,
+CityName varchar(40) not null
+);
+
+Create table DISTANCE 
+(
+SNo integer primary key,
+InitCity integer references CITIES(CityID) on update cascade,
+FinalCity integer references CITIES(CityID) on update cascade,
+Distance integer not null
+);
+
+create table Routes
+(
+RouteID integer not null,
+FromCity integer not null,
+ToCity integer not null,
+Sequence integer not null
+);
+
+create table price(
+TrainID integer not null,
+Stop_Cost integer not null
+);
+
+
+INSERTS:
+
+insert into CITIES values (1,'Bangalore'); 
+insert into CITIES values (2,'Chennai'); 
+insert into CITIES values (3,'Mumbai'); 
+insert into CITIES values (4,'Hyderabad'); 
+insert into CITIES values (5,'Mysore'); 
+insert into CITIES values (6,'Hampi'); 
+insert into CITIES values (7,'Ahmedabad'); 
+insert into CITIES values (8,'Kanyakumari'); 
+insert into CITIES values (9,'Srinagar'); 
+insert into CITIES values (10,'Delhi');
+
+
+insert into TRAINS values(1,'Golden Chariot',80,1);
+insert into TRAINS values(2,'Rajdhani',90,2);
+insert into TRAINS values(3,'Train18',220,3);
+insert into TRAINS values(4,'Double Decker',50,4);
+insert into TRAINS values(5,'Shatabdi',120,5);
+insert into TRAINS values(6,'Delhi Express',70,6);
+insert into TRAINS values(7,'Biryanai Express',60,7);
+insert into TRAINS values(8,'SWR Circle1',70,8);
+insert into TRAINS values(9,'India Express',80,9);
+insert into TRAINS values(10,'SWR Circle2',70,10);
+insert into TRAINS values(11,'SWR Circle3',70,11);
+
+
+Insert into DISTANCE values(1,1,2,350);
+Insert into DISTANCE values(2,1,3,1100);
+Insert into DISTANCE values(3,1,4,300);
+Insert into DISTANCE values(4,1,5,150);
+Insert into DISTANCE values(5,1,6,350);
+Insert into DISTANCE values(6,1,7,1500);
+Insert into DISTANCE values(7,1,8,650);
+Insert into DISTANCE values(8,1,9,3000);
+Insert into DISTANCE values(9,1,10,2100);
+Insert into DISTANCE values(10,2,3,1300);
+Insert into DISTANCE values(11,2,4,650);
+Insert into DISTANCE values(12,2,5,500);
+Insert into DISTANCE values(13,2,6,700);
+Insert into DISTANCE values(14,2,7,1800);
+Insert into DISTANCE values(15,2,8,700);
+Insert into DISTANCE values(16,2,9,3400);
+Insert into DISTANCE values(17,2,10,2200);
+Insert into DISTANCE values(18,3,4,750);
+Insert into DISTANCE values(19,3,5,1000);
+Insert into DISTANCE values(20,3,6,750);
+Insert into DISTANCE values(21,3,7,530);
+Insert into DISTANCE values(22,3,8,1600);
+Insert into DISTANCE values(23,3,9,2200);
+Insert into DISTANCE values(24,3,10,1400);
+Insert into DISTANCE values(25,4,5,750);
+Insert into DISTANCE values(26,4,6,400);
+Insert into DISTANCE values(27,4,7,1200);
+Insert into DISTANCE values(28,4,8,1300);
+Insert into DISTANCE values(29,4,9,2400);
+Insert into DISTANCE values(30,4,10,1600);
+Insert into DISTANCE values(31,5,6,450);   
+Insert into DISTANCE values(32,5,7,1573);  
+Insert into DISTANCE values(33,5,8,614);
+Insert into DISTANCE values(34,5,9,3145);
+Insert into DISTANCE values(35,5,10,2328);
+Insert into DISTANCE values(36,6,7,1243);
+Insert into DISTANCE values(37,6,8,1022);
+Insert into DISTANCE values(38,6,9,2690);
+Insert into DISTANCE values(39,6,10,1980);
+Insert into DISTANCE values(40,7,8,2165);
+Insert into DISTANCE values(41,7,9,1641);
+Insert into DISTANCE values(42,7,10,927);
+Insert into DISTANCE values(43,8,9,3660);
+Insert into DISTANCE values(44,8,10,2842);
+Insert into DISTANCE values(45,9,10,815);
+
+
+insert into Routes values( 1, 1, 5,  1 ) ;
+insert into Routes values( 1, 5, 6,  2 ) ;
+insert into Routes values( 1, 6, 2,  3 ) ;
+insert into Routes values( 2, 10, 7,  1 ) ;
+insert into Routes values( 2, 7, 3,  2 ) ;
+insert into Routes values( 3, 2, 1,  1 ) ;
+insert into Routes values( 3, 1, 3,  2 ) ;
+insert into Routes values( 3, 3, 7,  3 ) ;
+insert into Routes values( 3, 7, 4,  4 ) ;
+insert into Routes values( 4, 1, 2,  1 ) ;
+insert into Routes values( 5, 10, 7,  1 ) ;
+insert into Routes values( 6, 4, 2,  1 ) ;
+insert into Routes values( 7, 2, 8,  2 ) ;
+insert into Routes values( 8, 8, 2,  1 ) ;
+insert into Routes values( 8, 2, 1,  2 ) ;
+insert into Routes values( 8, 1, 6,  3 ) ;
+insert into Routes values( 8, 6, 5,  4 ) ;
+insert into Routes values( 8, 5, 3,  5 ) ;
+insert into Routes values( 8, 3, 7,  6 ) ;
+insert into Routes values( 8, 7, 4,  7 ) ;
+insert into Routes values( 8, 4, 10,  8 ) ;
+insert into Routes values( 8, 10, 9,  9 ) ;
+insert into Routes values( 9, 6, 1,  1 ) ;
+insert into Routes values( 9, 1, 8,  2 ) ;
+insert into Routes values( 10, 8, 5,  1 ) ;
+insert into Routes values( 10, 5, 6,  2 ) ;
+insert into Routes values( 11, 6, 4,  1 ) ;
+insert into Routes values( 11, 4, 8,  2 ) ;
+
+insert into price values(1, 15000);
+insert into price values(2, 1500);
+insert into price values(3, 2000);
+insert into price values(4, 800);
+insert into price values(5, 1500);
+insert into price values(6, 700);
+insert into price values(7, 600);
+insert into price values(8, 500);
+insert into price values(9, 600);
+insert into price values(10, 650);
+insert into price values(11, 650);
