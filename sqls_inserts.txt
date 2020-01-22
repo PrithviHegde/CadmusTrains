@@ -35,6 +35,10 @@ TrainID integer not null,
 Stop_Cost integer not null
 );
 
+create table index_login(
+username varchar(100) not null,
+password varchar(100) not null,
+primary key(username, password);
 
 INSERTS:
 
@@ -150,3 +154,6 @@ insert into price values(8, 500);
 insert into price values(9, 600);
 insert into price values(10, 650);
 insert into price values(11, 650);
+
+insert into index_login values('prithvi','prithvi');
+insert into index_login values('ras','ras');
