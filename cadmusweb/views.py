@@ -302,6 +302,11 @@ def Delete(request):
             # To delete the associated route from the Routes table
             DeleteRouteSQL = 'delete from routes where RouteID = ' + str(RouteID)
             mycursor.execute(DeleteRouteSQL)
+
+            # To delete the associated price from price table
+            DeletePriceSQL = 'delete from price where TrainID = ' + str(RouteID)
+            mycursor.execute(DeletePriceSQL)
+            
             con.commit()
             return render(request, 'test.html',)
     else:
